@@ -4,21 +4,25 @@
 #
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.4
+Version:	0.4.1
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	61f4a82b6f6a3c6ae2205eff347874c2
+# Source0-md5:	c6b3b57b21475b5fb1e56fec68138bf8
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	glib2-devel >= 1:2.25.8
+BuildRequires:	automake >= 1:1.11
+BuildRequires:	glib2-devel >= 1:2.25.10
 BuildRequires:	gobject-introspection-devel >= 0.6.7
-BuildRequires:	gtk-doc
-BuildRequires:	libtool
+BuildRequires:	gtk+2-devel
+BuildRequires:	gtk-doc >= 1.14
+BuildRequires:	libgee-devel
+BuildRequires:	libtool >= 2:2.2
+BuildRequires:	libxml2-devel
 BuildRequires:	rpmbuild(macros) >= 1.527
-Requires(post,postun):	glib2 >= 1:2.25.8
+BuildRequires:	vala >= 0.8.0
+Requires(post,postun):	glib2 >= 1:2.25.10
 Requires:	dbus
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -32,7 +36,7 @@ Summary:	Header files for dconf library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki dconf
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.25.8
+Requires:	glib2-devel >= 1:2.25.10
 
 %description devel
 Header files for dconf library.
@@ -51,6 +55,18 @@ Static dconf library.
 
 %description static -l pl.UTF-8
 Statyczna biblioteka dconf.
+
+%package editor
+Summary:	Configuration editor for dconf
+Summary(pl.UTF-8):	Edytor konfiguracji dla dconf
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description editor
+dconf-editor allows you to browse and modify dconf database.
+
+%description editor -l pl.UTF-8
+dconf-editor pozwala na przeglądanie i modyfikowanie bazy dconf.
 
 %package apidocs
 Summary:	dconf API documentation
@@ -127,6 +143,10 @@ exit 0
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libdconf.a
+
+%files editor
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/dconf-editor
 
 %if %{with apidocs}
 %files apidocs

@@ -4,12 +4,12 @@
 #
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.4.1
+Version:	0.5.1
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	c6b3b57b21475b5fb1e56fec68138bf8
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.5/%{name}-%{version}.tar.bz2
+# Source0-md5:	c905497d0255fe2ba58564f9655908ab
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1:1.11
@@ -43,18 +43,6 @@ Header files for dconf library.
 
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki dconf.
-
-%package static
-Summary:	Static dconf library
-Summary(pl.UTF-8):	Statyczna biblioteka dconf
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description static
-Static dconf library.
-
-%description static -l pl.UTF-8
-Statyczna biblioteka dconf.
 
 %package editor
 Summary:	Configuration editor for dconf
@@ -125,24 +113,22 @@ exit 0
 %defattr(644,root,root,755)
 %doc NEWS
 %attr(755,root,root) %{_bindir}/dconf
-%attr(755,root,root) %{_libdir}/libdconf.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdconf.so.0
+%attr(755,root,root) %{_libdir}/libdconf.so.0.0.0
+%attr(755,root,root) %{_libdir}/libdconf.so.0
 %attr(755,root,root) %{_libexecdir}/dconf-service
 %attr(755,root,root) %{_libdir}/gio/modules/libdconfsettings.so
-%{_libdir}/girepository-1.0/dconf-0.3.typelib
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
 %{_datadir}/dbus-1/system-services/ca.desrt.dconf.service
+%{_libdir}/girepository-1.0/*.typelib
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libdconf.so
-%{_datadir}/gir-1.0/dconf-0.3.gir
 %{_includedir}/dconf
 %{_pkgconfigdir}/dconf.pc
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/libdconf.a
+# split to a separate package?
+%{_datadir}/vala/vapi/dconf.*
+%{_datadir}/gir-1.0/*.gir
 
 %files editor
 %defattr(644,root,root,755)

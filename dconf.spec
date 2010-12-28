@@ -4,24 +4,22 @@
 #
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.5.1
+Version:	0.6
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	c905497d0255fe2ba58564f9655908ab
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.6/%{name}-%{version}.tar.bz2
+# Source0-md5:	f353d941260652605d2afab3cf1c0063
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	glib2-devel >= 1:2.25.10
-BuildRequires:	gobject-introspection-devel >= 0.6.7
-BuildRequires:	gtk+2-devel
-BuildRequires:	gtk-doc >= 1.14
-BuildRequires:	libgee-devel
+BuildRequires:	glib2-devel >= 1:2.25.16
+BuildRequires:	gtk+3-devel
+BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel
 BuildRequires:	rpmbuild(macros) >= 1.527
-BuildRequires:	vala >= 0.8.0
+BuildRequires:	vala >= 0.9.5
 Requires(post,postun):	glib2 >= 1:2.25.10
 Requires:	dbus
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -119,7 +117,6 @@ exit 0
 %attr(755,root,root) %{_libdir}/gio/modules/libdconfsettings.so
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
 %{_datadir}/dbus-1/system-services/ca.desrt.dconf.service
-%{_libdir}/girepository-1.0/*.typelib
 
 %files devel
 %defattr(644,root,root,755)
@@ -128,7 +125,6 @@ exit 0
 %{_pkgconfigdir}/dconf.pc
 # split to a separate package?
 %{_datadir}/vala/vapi/dconf.*
-%{_datadir}/gir-1.0/*.gir
 
 %files editor
 %defattr(644,root,root,755)

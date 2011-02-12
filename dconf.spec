@@ -4,23 +4,23 @@
 #
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.6
+Version:	0.7.2
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	f353d941260652605d2afab3cf1c0063
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.7/%{name}-%{version}.tar.bz2
+# Source0-md5:	1583be314e3ea0ab483d104e791ef653
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	glib2-devel >= 1:2.25.16
-BuildRequires:	gtk+3-devel
+BuildRequires:	glib2-devel >= 1:2.28.0
+BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel
 BuildRequires:	rpmbuild(macros) >= 1.527
-BuildRequires:	vala >= 0.9.5
-Requires(post,postun):	glib2 >= 1:2.25.10
+BuildRequires:	vala >= 1:0.11.4
+Requires(post,postun):	glib2 >= 1:2.28.0
 Requires:	dbus
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -34,7 +34,7 @@ Summary:	Header files for dconf library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki dconf
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.25.10
+Requires:	glib2-devel >= 1:2.28.0
 
 %description devel
 Header files for dconf library.
@@ -111,8 +111,10 @@ exit 0
 %defattr(644,root,root,755)
 %doc NEWS
 %attr(755,root,root) %{_bindir}/dconf
-%attr(755,root,root) %{_libdir}/libdconf.so.0.0.0
-%attr(755,root,root) %{_libdir}/libdconf.so.0
+%attr(755,root,root) %{_libdir}/libdconf.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libdconf.so.0
+%attr(755,root,root) %{_libdir}/libdconf-dbus-1.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libdconf-dbus-1.so.0
 %attr(755,root,root) %{_libexecdir}/dconf-service
 %attr(755,root,root) %{_libdir}/gio/modules/libdconfsettings.so
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
@@ -121,14 +123,19 @@ exit 0
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libdconf.so
+%attr(755,root,root) %{_libdir}/libdconf-dbus-1.so
 %{_includedir}/dconf
+%{_includedir}/dconf-dbus-1
 %{_pkgconfigdir}/dconf.pc
+%{_pkgconfigdir}/dconf-dbus-1.pc
 # split to a separate package?
 %{_datadir}/vala/vapi/dconf.*
 
 %files editor
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/dconf-editor
+%{_desktopdir}/dconf-editor.desktop
+%{_datadir}/dconf-editor/dconf-editor.ui
 
 %if %{with apidocs}
 %files apidocs

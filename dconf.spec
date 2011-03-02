@@ -5,7 +5,7 @@
 Summary:	Low-level configuration system
 Name:		dconf
 Version:	0.7.2
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.7/%{name}-%{version}.tar.bz2
@@ -83,6 +83,8 @@ Dokumentacja API biblioteki dconf.
 %install
 rm -rf $RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/dconf/{db,profile}
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -119,6 +121,9 @@ exit 0
 %attr(755,root,root) %{_libdir}/gio/modules/libdconfsettings.so
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
 %{_datadir}/dbus-1/system-services/ca.desrt.dconf.service
+%dir %{_sysconfdir}/dconf
+%dir %{_sysconfdir}/dconf/db
+%dir %{_sysconfdir}/dconf/profile
 
 %files devel
 %defattr(644,root,root,755)

@@ -140,6 +140,7 @@ exit 0
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/dconf-editor
 %{_desktopdir}/dconf-editor.desktop
+%dir %{_datadir}/dconf-editor
 %{_datadir}/dconf-editor/dconf-editor.ui
 
 %if %{with apidocs}

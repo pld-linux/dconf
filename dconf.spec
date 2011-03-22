@@ -13,13 +13,14 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.7/%{name}-%{version}.tar
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1:1.11
+BuildRequires:	dbus-devel
 BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel
 BuildRequires:	rpmbuild(macros) >= 1.527
-BuildRequires:	vala >= 1:0.11.4
+BuildRequires:	vala >= 1:0.11.7
 Requires(post,postun):	glib2 >= 1:2.28.0
 Requires:	dbus
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -34,6 +35,7 @@ Summary:	Header files for dconf library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki dconf
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	dbus-devel
 Requires:	glib2-devel >= 1:2.28.0
 
 %description devel
@@ -88,7 +90,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/dconf/{db,profile}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 

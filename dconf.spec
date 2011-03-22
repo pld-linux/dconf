@@ -17,7 +17,6 @@ BuildRequires:	dbus-devel
 BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.15
-BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	vala >= 1:0.11.7
@@ -72,7 +71,6 @@ Dokumentacja API biblioteki dconf.
 %setup -q
 
 %build
-%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
@@ -89,8 +87,6 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/dconf/{db,profile}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 

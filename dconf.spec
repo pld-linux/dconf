@@ -5,7 +5,7 @@
 Summary:	Low-level configuration system
 Name:		dconf
 Version:	0.7.3
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.7/%{name}-%{version}.tar.bz2

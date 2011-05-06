@@ -4,12 +4,12 @@
 #
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.7.3
-Release:	2
+Version:	0.7.4
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.7/%{name}-%{version}.tar.bz2
-# Source0-md5:	f541db70d0623d109b1866c732f1a51c
+# Source0-md5:	20d74109ff72ae16fcca3f5adf3d6885
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1:1.11
@@ -66,6 +66,18 @@ API documentation for dconf library.
 
 %description apidocs -l pl.UTF-8
 Dokumentacja API biblioteki dconf.
+
+%package -n bash-completion-dconf
+Summary:	bash-completion for dconf
+Summary(pl.UTF-8):	Bashowe uzupełnianie nazw dla dconf
+Group:		Applications/Shells
+Requires:	bash-completion
+
+%description -n bash-completion-dconf
+bash-completion for dconf.
+
+%description -n bash-completion-dconf -l pl.UTF-8
+Bashowe uzupełnianie nazw dla dconf.
 
 %prep
 %setup -q
@@ -146,3 +158,7 @@ exit 0
 %defattr(644,root,root,755)
 %{_gtkdocdir}/dconf
 %endif
+
+%files -n bash-completion-dconf
+%defattr(644,root,root,755)
+%{_sysconfdir}/bash_completion.d/dconf-bash-completion.sh

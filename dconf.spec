@@ -4,12 +4,12 @@
 #
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.7.4
+Version:	0.7.5
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.7/%{name}-%{version}.tar.bz2
-# Source0-md5:	20d74109ff72ae16fcca3f5adf3d6885
+# Source0-md5:	d784f8afca04473d194a72047595c28e
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1:1.11
@@ -109,15 +109,17 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 
 umask 022
-%{_bindir}/gio-querymodules %{_libdir}/gio/modules
-exit 0
+%{_bindir}/gio-querymodules %{_libdir}/gio/modules || :
+
+%glib_compile_schemas
 
 %postun
 /sbin/ldconfig
 
 umask 022
-%{_bindir}/gio-querymodules %{_libdir}/gio/modules
-exit 0
+%{_bindir}/gio-querymodules %{_libdir}/gio/modules || :
+
+%glib_compile_schemas
 
 %files
 %defattr(644,root,root,755)
@@ -131,6 +133,7 @@ exit 0
 %attr(755,root,root) %{_libdir}/gio/modules/libdconfsettings.so
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
 %{_datadir}/dbus-1/system-services/ca.desrt.dconf.service
+%{_datadir}/glib-2.0/schemas/ca.desrt.dconf-editor.gschema.xml
 %dir %{_sysconfdir}/dconf
 %dir %{_sysconfdir}/dconf/db
 %dir %{_sysconfdir}/dconf/profile

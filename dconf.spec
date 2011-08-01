@@ -4,12 +4,12 @@
 #
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.7.5
+Version:	0.8.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.7/%{name}-%{version}.tar.bz2
-# Source0-md5:	d784f8afca04473d194a72047595c28e
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.8/%{name}-%{version}.tar.bz2
+# Source0-md5:	4c5c61a619ea27ffa15f88d142d20663
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1:1.11
@@ -19,7 +19,9 @@ BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libxml2-devel
 BuildRequires:	rpmbuild(macros) >= 1.527
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala >= 1:0.11.7
+BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.28.0
 Requires:	dbus
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)

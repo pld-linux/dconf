@@ -4,12 +4,12 @@
 #
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.8.0
+Version:	0.9.1
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.8/%{name}-%{version}.tar.bz2
-# Source0-md5:	4c5c61a619ea27ffa15f88d142d20663
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.9/%{name}-%{version}.tar.xz
+# Source0-md5:	914bc3603b245de4f7e634a17a06caef
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1:1.11

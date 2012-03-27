@@ -4,26 +4,27 @@
 #
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.10.0
+Version:	0.12.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.10/%{name}-%{version}.tar.xz
-# Source0-md5:	71894eba6d559fb736a43032929fb98a
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.12/%{name}-%{version}.tar.xz
+# Source0-md5:	6aec9d37fca1614cd672bc5b2215c9f3
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	dbus-devel
-BuildRequires:	glib2-devel >= 1:2.29.90
+BuildRequires:	glib2-devel >= 1:2.31.18
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libxml2-devel
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	vala >= 1:0.11.7
+BuildRequires:	vala >= 2:0.15.1
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.28.0
+Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	dbus
+Requires:	glib2 >= 1:2.31.18
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,7 +38,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki dconf
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
-Requires:	glib2-devel >= 1:2.28.0
+Requires:	glib2-devel >= 1:2.31.18
 
 %description devel
 Header files for dconf library.
@@ -50,6 +51,8 @@ Summary:	Configuration editor for dconf
 Summary(pl.UTF-8):	Edytor konfiguracji dla dconf
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
+Requires(post,postun):	gtk-update-icon-cache
+Requires:	hicolor-icon-theme
 
 %description editor
 dconf-editor allows you to browse and modify dconf database.
@@ -123,6 +126,12 @@ umask 022
 
 %glib_compile_schemas
 
+%post editor
+%update_icon_cache hicolor
+
+%postun editor
+%update_icon_cache hicolor
+
 %files
 %defattr(644,root,root,755)
 %doc NEWS
@@ -134,7 +143,6 @@ umask 022
 %attr(755,root,root) %{_libexecdir}/dconf-service
 %attr(755,root,root) %{_libdir}/gio/modules/libdconfsettings.so
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
-%{_datadir}/dbus-1/system-services/ca.desrt.dconf.service
 %{_datadir}/glib-2.0/schemas/ca.desrt.dconf-editor.gschema.xml
 %dir %{_sysconfdir}/dconf
 %dir %{_sysconfdir}/dconf/db
@@ -155,8 +163,8 @@ umask 022
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/dconf-editor
 %{_desktopdir}/dconf-editor.desktop
-%dir %{_datadir}/dconf-editor
-%{_datadir}/dconf-editor/dconf-editor.ui
+%{_datadir}/dconf-editor
+%{_iconsdir}/hicolor/*/*/*.png
 
 %if %{with apidocs}
 %files apidocs

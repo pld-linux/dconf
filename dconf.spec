@@ -1,11 +1,12 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
+%bcond_without	vala		# do not build Vala API
 #
 Summary:	Low-level configuration system
 Name:		dconf
 Version:	0.12.1
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.12/%{name}-%{version}.tar.xz
@@ -20,7 +21,7 @@ BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libxml2-devel
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	vala >= 2:0.15.1
+%{?with_vala:BuildRequires:	vala >= 2:0.15.1}
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	dbus
@@ -83,6 +84,18 @@ bash-completion for dconf.
 
 %description -n bash-completion-dconf -l pl.UTF-8
 Bashowe uzupełnianie nazw dla dconf.
+
+%package -n vala-dconf
+Summary:	dconf API for Vala language
+Summary(pl.UTF-8):	API dconf dla języka Vala
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description -n vala-dconf
+dconf API for Vala language.
+
+%description -n vala-dconf -l pl.UTF-8
+API dconf dla języka Vala.
 
 %prep
 %setup -q
@@ -156,8 +169,6 @@ umask 022
 %{_includedir}/dconf-dbus-1
 %{_pkgconfigdir}/dconf.pc
 %{_pkgconfigdir}/dconf-dbus-1.pc
-# split to a separate package?
-%{_datadir}/vala/vapi/dconf.*
 
 %files editor
 %defattr(644,root,root,755)
@@ -175,3 +186,10 @@ umask 022
 %files -n bash-completion-dconf
 %defattr(644,root,root,755)
 %{_sysconfdir}/bash_completion.d/dconf-bash-completion.sh
+
+%if %{with vala}
+%files -n vala-dconf
+%defattr(644,root,root,755)
+%{_datadir}/vala/vapi/dconf.deps
+%{_datadir}/vala/vapi/dconf.vapi
+%endif

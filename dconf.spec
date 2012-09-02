@@ -4,6 +4,7 @@
 %bcond_without	vala		# do not build Vala API
 #
 Summary:	Low-level configuration system
+Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
 Version:	0.12.1
 Release:	2
@@ -21,7 +22,8 @@ BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libxml2-devel
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
-%{?with_vala:BuildRequires:	vala >= 2:0.15.1}
+# not needed atm., generated files are packaged
+#%{?with_vala:BuildRequires:	vala >= 2:0.15.1}
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	dbus
@@ -32,6 +34,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 dconf is a low-level configuration system. Its main purpose is to
 provide a backend to GSettings on platforms that don't already have
 configuration storage systems.
+
+%description -l pl.UTF-8
+dconf to niskopoziomowy system konfiguracji. Głównym celem jest
+dostarczenie backendu dla GSettings na platformach, które jeszcze nie
+mają systemów przechowywania danych konfiguracyjnych.
 
 %package devel
 Summary:	Header files for dconf library
@@ -90,6 +97,7 @@ Summary:	dconf API for Vala language
 Summary(pl.UTF-8):	API dconf dla języka Vala
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
+Requires:	vala >= 2:0.15.1
 
 %description -n vala-dconf
 dconf API for Vala language.

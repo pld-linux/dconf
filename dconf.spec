@@ -6,20 +6,23 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.12.1
-Release:	2
+Version:	0.14.0
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.12/%{name}-%{version}.tar.xz
-# Source0-md5:	0ebbfa50ab69e5d679cf8a1c68e75bf3
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.14/%{name}-%{version}.tar.xz
+# Source0-md5:	d2d6e49e77d9dba354ef16b8b9fce0d5
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	dbus-devel
-BuildRequires:	glib2-devel >= 1:2.31.18
+BuildRequires:	gettext-devel
+BuildRequires:	glib2-devel >= 1:2.33.3
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.15
+BuildRequires:	intltool >= 0.50.0
 BuildRequires:	libxml2-devel
+BuildRequires:	libxslt-progs
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
 # not needed atm., generated files are packaged
@@ -27,7 +30,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	dbus
-Requires:	glib2 >= 1:2.31.18
+Requires:	glib2 >= 1:2.33.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,7 +49,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki dconf
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
-Requires:	glib2-devel >= 1:2.31.18
+Requires:	glib2-devel >= 1:2.33.3
 
 %description devel
 Header files for dconf library.
@@ -97,7 +100,7 @@ Summary:	dconf API for Vala language
 Summary(pl.UTF-8):	API dconf dla języka Vala
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
-Requires:	vala >= 2:0.15.1
+Requires:	vala >= 2:0.17.0
 
 %description -n vala-dconf
 dconf API for Vala language.
@@ -109,8 +112,11 @@ API dconf dla języka Vala.
 %setup -q
 
 %build
+mkdir m4
+%{__intltoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	--with-html-dir=%{_gtkdocdir} \
@@ -127,6 +133,8 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/dconf/{db,profile}
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
+
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -153,12 +161,12 @@ umask 022
 %postun editor
 %update_icon_cache hicolor
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc NEWS
 %attr(755,root,root) %{_bindir}/dconf
 %attr(755,root,root) %{_libdir}/libdconf.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdconf.so.0
+%attr(755,root,root) %ghost %{_libdir}/libdconf.so.1
 %attr(755,root,root) %{_libdir}/libdconf-dbus-1.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libdconf-dbus-1.so.0
 %attr(755,root,root) %{_libexecdir}/dconf-service
@@ -168,6 +176,9 @@ umask 022
 %dir %{_sysconfdir}/dconf
 %dir %{_sysconfdir}/dconf/db
 %dir %{_sysconfdir}/dconf/profile
+%{_mandir}/man1/dconf-service.1*
+%{_mandir}/man1/dconf.1*
+%{_mandir}/man7/dconf.7*
 
 %files devel
 %defattr(644,root,root,755)
@@ -184,6 +195,7 @@ umask 022
 %{_desktopdir}/dconf-editor.desktop
 %{_datadir}/dconf-editor
 %{_iconsdir}/hicolor/*/*/*.png
+%{_mandir}/man1/dconf-editor.1*
 
 %if %{with apidocs}
 %files apidocs
@@ -193,7 +205,7 @@ umask 022
 
 %files -n bash-completion-dconf
 %defattr(644,root,root,755)
-%{_sysconfdir}/bash_completion.d/dconf-bash-completion.sh
+%{_datadir}/bash-completion/completions/dconf
 
 %if %{with vala}
 %files -n vala-dconf

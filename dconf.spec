@@ -13,7 +13,7 @@ Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.14/%{name}-%{version}.tar.xz
 # Source0-md5:	d2d6e49e77d9dba354ef16b8b9fce0d5
 URL:		http://live.gnome.org/dconf
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	dbus-devel
 BuildRequires:	gettext-devel
@@ -26,9 +26,9 @@ BuildRequires:	libxslt-progs
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
 # not needed atm., generated files are packaged
-#%{?with_vala:BuildRequires:	vala >= 2:0.15.1}
+#%{?with_vala:BuildRequires:	vala >= 2:0.17.0}
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.26.0
+Requires(post,postun):	glib2 >= 1:2.33.3
 Requires:	dbus
 Requires:	glib2 >= 1:2.33.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -87,7 +87,7 @@ Dokumentacja API biblioteki dconf.
 Summary:	bash-completion for dconf
 Summary(pl.UTF-8):	Bashowe uzupełnianie nazw dla dconf
 Group:		Applications/Shells
-Requires:	bash-completion
+Requires:	bash-completion >= 2
 
 %description -n bash-completion-dconf
 bash-completion for dconf.
@@ -163,7 +163,7 @@ umask 022
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc NEWS
+%doc NEWS README
 %attr(755,root,root) %{_bindir}/dconf
 %attr(755,root,root) %{_libdir}/libdconf.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libdconf.so.1

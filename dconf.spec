@@ -6,18 +6,18 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.14.1
+Version:	0.16.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.14/%{name}-%{version}.tar.xz
-# Source0-md5:	eaa62d1a5655e6dd620358d6b1c4f272
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.16/%{name}-%{version}.tar.xz
+# Source0-md5:	a266b3f75edabaf15ffcbe9e21130f7e
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	dbus-devel
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.33.3
+BuildRequires:	glib2-devel >= 1:2.35.2
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	intltool >= 0.50.0
@@ -28,9 +28,9 @@ BuildRequires:	tar >= 1:1.22
 # not needed atm., generated files are packaged
 #%{?with_vala:BuildRequires:	vala >= 2:0.17.0}
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.33.3
+Requires(post,postun):	glib2 >= 1:2.35.2
 Requires:	dbus
-Requires:	glib2 >= 1:2.33.3
+Requires:	glib2 >= 1:2.35.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -49,7 +49,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki dconf
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
-Requires:	glib2-devel >= 1:2.33.3
+Requires:	glib2-devel >= 1:2.35.2
 
 %description devel
 Header files for dconf library.
@@ -112,7 +112,6 @@ API dconf dla języka Vala.
 %setup -q
 
 %build
-mkdir m4
 %{__intltoolize}
 %{__aclocal}
 %{__autoconf}
@@ -157,9 +156,11 @@ umask 022
 
 %post editor
 %update_icon_cache hicolor
+%update_icon_cache HighContrast
 
 %postun editor
 %update_icon_cache hicolor
+%update_icon_cache HighContrast
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -195,6 +196,7 @@ umask 022
 %{_desktopdir}/dconf-editor.desktop
 %{_datadir}/dconf-editor
 %{_iconsdir}/hicolor/*/*/*.png
+%{_iconsdir}/HighContrast/*/*/*.png
 %{_mandir}/man1/dconf-editor.1*
 
 %if %{with apidocs}

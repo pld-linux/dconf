@@ -6,19 +6,20 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.16.1
+Version:	0.18.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.16/%{name}-%{version}.tar.xz
-# Source0-md5:	1f17e92511a21240ab5a56e4523f77da
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.18/%{name}-%{version}.tar.xz
+# Source0-md5:	69a12ed68893f2e1e81ac4e531bc1515
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.11
+BuildRequires:	vala >= 0.17.0
 BuildRequires:	dbus-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.35.2
-BuildRequires:	gtk+3-devel >= 3.0.0
+BuildRequires:	gtk+3-devel >= 3.4.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	intltool >= 0.50.0
 BuildRequires:	libxml2-devel
@@ -194,7 +195,6 @@ umask 022
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/dconf-editor
 %{_desktopdir}/dconf-editor.desktop
-%{_datadir}/dconf-editor
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/HighContrast/*/*/*.png
 %{_mandir}/man1/dconf-editor.1*

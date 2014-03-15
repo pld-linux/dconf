@@ -89,6 +89,9 @@ Summary:	bash-completion for dconf
 Summary(pl.UTF-8):	Bashowe uzupełnianie nazw dla dconf
 Group:		Applications/Shells
 Requires:	bash-completion >= 2
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description -n bash-completion-dconf
 bash-completion for dconf.

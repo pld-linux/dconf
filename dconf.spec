@@ -6,19 +6,18 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.18.0
+Version:	0.20.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.18/%{name}-%{version}.tar.xz
-# Source0-md5:	69a12ed68893f2e1e81ac4e531bc1515
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.20/%{name}-%{version}.tar.xz
+# Source0-md5:	542db78e4867ac575ec0f69f79b3eebd
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake >= 1:1.11
-BuildRequires:	vala >= 0.17.0
+BuildRequires:	automake >= 1:1.11.2
 BuildRequires:	dbus-devel
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.35.2
+BuildRequires:	glib2-devel >= 1:2.39.1
 BuildRequires:	gtk+3-devel >= 3.4.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	intltool >= 0.50.0
@@ -29,9 +28,9 @@ BuildRequires:	tar >= 1:1.22
 # not needed atm., generated files are packaged
 #%{?with_vala:BuildRequires:	vala >= 2:0.17.0}
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.35.2
+Requires(post,postun):	glib2 >= 1:2.39.1
 Requires:	dbus
-Requires:	glib2 >= 1:2.35.2
+Requires:	glib2 >= 1:2.39.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,7 +49,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki dconf
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
-Requires:	glib2-devel >= 1:2.35.2
+Requires:	glib2-devel >= 1:2.39.1
 
 %description devel
 Header files for dconf library.
@@ -104,7 +103,7 @@ Summary:	dconf API for Vala language
 Summary(pl.UTF-8):	API dconf dla języka Vala
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
-Requires:	vala >= 2:0.17.0
+Requires:	vala >= 2:0.18.0
 
 %description -n vala-dconf
 dconf API for Vala language.
@@ -197,6 +196,7 @@ umask 022
 %files editor
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/dconf-editor
+%{_datadir}/appdata/dconf-editor.appdata.xml
 %{_desktopdir}/dconf-editor.desktop
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/HighContrast/*/*/*.png

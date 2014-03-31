@@ -7,7 +7,7 @@ Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
 Version:	0.20.0
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.20/%{name}-%{version}.tar.xz
@@ -130,6 +130,7 @@ API dconf dla języka Vala.
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/dconf/{db,profile}
+install -d $RPM_BUILD_ROOT%{_datadir}/dconf/profile
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -180,6 +181,8 @@ umask 022
 %dir %{_sysconfdir}/dconf
 %dir %{_sysconfdir}/dconf/db
 %dir %{_sysconfdir}/dconf/profile
+%dir %{_datadir}/dconf
+%dir %{_datadir}/dconf/profile
 %{_mandir}/man1/dconf-service.1*
 %{_mandir}/man1/dconf.1*
 %{_mandir}/man7/dconf.7*

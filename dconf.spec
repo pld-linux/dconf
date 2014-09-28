@@ -6,12 +6,12 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.20.0
-Release:	2
+Version:	0.22.0
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.20/%{name}-%{version}.tar.xz
-# Source0-md5:	542db78e4867ac575ec0f69f79b3eebd
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.22/%{name}-%{version}.tar.xz
+# Source0-md5:	5459a539ffc483f9c002ddeab626a64e
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.11.2
@@ -199,8 +199,9 @@ umask 022
 %files editor
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/dconf-editor
-%{_datadir}/appdata/dconf-editor.appdata.xml
-%{_desktopdir}/dconf-editor.desktop
+%{_datadir}/appdata/ca.desrt.dconf-editor.appdata.xml
+%{_desktopdir}/ca.desrt.dconf-editor.desktop
+%{_datadir}/dbus-1/services/ca.desrt.dconf-editor.service
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/HighContrast/*/*/*.png
 %{_mandir}/man1/dconf-editor.1*
@@ -213,7 +214,7 @@ umask 022
 
 %files -n bash-completion-dconf
 %defattr(644,root,root,755)
-%{_datadir}/bash-completion/completions/dconf
+%{bash_compdir}/dconf
 
 %if %{with vala}
 %files -n vala-dconf

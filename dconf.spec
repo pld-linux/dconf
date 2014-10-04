@@ -26,7 +26,7 @@ BuildRequires:	libxslt-progs
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
 # not needed atm., generated files are packaged
-#%{?with_vala:BuildRequires:	vala >= 2:0.17.0}
+#%{?with_vala:BuildRequires:	vala >= 2:0.18.0}
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.39.1
 Requires:	dbus

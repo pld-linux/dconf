@@ -6,12 +6,12 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.22.0
-Release:	2
+Version:	0.24.0
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.22/%{name}-%{version}.tar.xz
-# Source0-md5:	5459a539ffc483f9c002ddeab626a64e
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.24/%{name}-%{version}.tar.xz
+# Source0-md5:	9bd257ba5b718f484fa0f4ab6e81e53b
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.11.2
@@ -20,7 +20,6 @@ BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.39.1
 BuildRequires:	gtk+3-devel >= 3.4.0
 BuildRequires:	gtk-doc >= 1.15
-BuildRequires:	intltool >= 0.50.0
 BuildRequires:	libxml2-devel
 BuildRequires:	libxslt-progs
 BuildRequires:	rpmbuild(macros) >= 1.527
@@ -56,20 +55,6 @@ Header files for dconf library.
 
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki dconf.
-
-%package editor
-Summary:	Configuration editor for dconf
-Summary(pl.UTF-8):	Edytor konfiguracji dla dconf
-Group:		X11/Applications
-Requires:	%{name} = %{version}-%{release}
-Requires(post,postun):	gtk-update-icon-cache
-Requires:	hicolor-icon-theme
-
-%description editor
-dconf-editor allows you to browse and modify dconf database.
-
-%description editor -l pl.UTF-8
-dconf-editor pozwala na przeglądanie i modyfikowanie bazy dconf.
 
 %package apidocs
 Summary:	dconf API documentation
@@ -115,7 +100,6 @@ API dconf dla języka Vala.
 %setup -q
 
 %build
-%{__intltoolize}
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
@@ -137,8 +121,6 @@ install -d $RPM_BUILD_ROOT%{_datadir}/dconf/profile
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 
-%find_lang %{name}
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -158,15 +140,7 @@ umask 022
 
 %glib_compile_schemas
 
-%post editor
-%update_icon_cache hicolor
-%update_icon_cache HighContrast
-
-%postun editor
-%update_icon_cache hicolor
-%update_icon_cache HighContrast
-
-%files -f %{name}.lang
+%files
 %defattr(644,root,root,755)
 %doc NEWS README
 %attr(755,root,root) %{_bindir}/dconf
@@ -177,7 +151,6 @@ umask 022
 %attr(755,root,root) %{_libexecdir}/dconf-service
 %attr(755,root,root) %{_libdir}/gio/modules/libdconfsettings.so
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
-%{_datadir}/glib-2.0/schemas/ca.desrt.dconf-editor.gschema.xml
 %dir %{_sysconfdir}/dconf
 %dir %{_sysconfdir}/dconf/db
 %dir %{_sysconfdir}/dconf/profile
@@ -195,16 +168,6 @@ umask 022
 %{_includedir}/dconf-dbus-1
 %{_pkgconfigdir}/dconf.pc
 %{_pkgconfigdir}/dconf-dbus-1.pc
-
-%files editor
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/dconf-editor
-%{_datadir}/appdata/ca.desrt.dconf-editor.appdata.xml
-%{_desktopdir}/ca.desrt.dconf-editor.desktop
-%{_datadir}/dbus-1/services/ca.desrt.dconf-editor.service
-%{_iconsdir}/hicolor/*/*/*.png
-%{_iconsdir}/HighContrast/*/*/*.png
-%{_mandir}/man1/dconf-editor.1*
 
 %if %{with apidocs}
 %files apidocs

@@ -16,11 +16,8 @@ URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.11.2
 BuildRequires:	dbus-devel
-BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.39.1
-BuildRequires:	gtk+3-devel >= 3.4.0
 BuildRequires:	gtk-doc >= 1.15
-BuildRequires:	libxml2-devel
 BuildRequires:	libxslt-progs
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22

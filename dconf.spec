@@ -6,17 +6,16 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.24.0
+Version:	0.26.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.24/%{name}-%{version}.tar.xz
-# Source0-md5:	9bd257ba5b718f484fa0f4ab6e81e53b
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.26/%{name}-%{version}.tar.xz
+# Source0-md5:	7fc3cb1cf22d904d8744bd12e9c9d3dd
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.11.2
-BuildRequires:	dbus-devel
-BuildRequires:	glib2-devel >= 1:2.39.1
+BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libxslt-progs
 BuildRequires:	rpmbuild(macros) >= 1.527
@@ -26,7 +25,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.39.1
 Requires:	dbus
-Requires:	glib2 >= 1:2.39.1
+Requires:	glib2 >= 1:2.44.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -44,8 +43,7 @@ Summary:	Header files for dconf library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki dconf
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	dbus-devel
-Requires:	glib2-devel >= 1:2.39.1
+Requires:	glib2-devel >= 1:2.44.0
 
 %description devel
 Header files for dconf library.
@@ -58,6 +56,9 @@ Summary:	dconf API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki dconf
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 API documentation for dconf library.
@@ -86,6 +87,9 @@ Summary(pl.UTF-8):	API dconf dla języka Vala
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala >= 2:0.18.0
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description -n vala-dconf
 dconf API for Vala language.
@@ -143,8 +147,6 @@ umask 022
 %attr(755,root,root) %{_bindir}/dconf
 %attr(755,root,root) %{_libdir}/libdconf.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libdconf.so.1
-%attr(755,root,root) %{_libdir}/libdconf-dbus-1.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdconf-dbus-1.so.0
 %attr(755,root,root) %{_libexecdir}/dconf-service
 %attr(755,root,root) %{_libdir}/gio/modules/libdconfsettings.so
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
@@ -160,11 +162,8 @@ umask 022
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libdconf.so
-%attr(755,root,root) %{_libdir}/libdconf-dbus-1.so
 %{_includedir}/dconf
-%{_includedir}/dconf-dbus-1
 %{_pkgconfigdir}/dconf.pc
-%{_pkgconfigdir}/dconf-dbus-1.pc
 
 %if %{with apidocs}
 %files apidocs

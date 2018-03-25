@@ -6,18 +6,18 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.26.0
+Version:	0.28.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.26/%{name}-%{version}.tar.xz
-# Source0-md5:	7fc3cb1cf22d904d8744bd12e9c9d3dd
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.28/%{name}-%{version}.tar.xz
+# Source0-md5:	81faa8e68e5ea71ff0ee75050fc0759c
+Patch0:		%{name}-docs-build.patch
 URL:		http://live.gnome.org/dconf
-BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake >= 1:1.11.2
 BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libxslt-progs
+BuildRequires:	meson >= 0.41.0
 BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
 # not needed atm., generated files are packaged
@@ -99,17 +99,13 @@ API dconf dla języka Vala.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	--with-html-dir=%{_gtkdocdir} \
-	%{__enable_disable apidocs gtk-doc} \
-	--disable-silent-rules
-%{__make}
+%meson build \
+	-Denable-gtk-doc=%{__true_false apidocs}
+
+%meson_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -117,8 +113,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/dconf/{db,profile}
 install -d $RPM_BUILD_ROOT%{_datadir}/dconf/profile
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+%meson_install -C build
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 

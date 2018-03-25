@@ -1,0 +1,11 @@
+--- dconf-0.28.0/docs/meson.build.fixdocs	2018-03-25 12:03:46.721885301 +0200
++++ dconf-0.28.0/docs/meson.build	2018-03-25 12:03:55.765199113 +0200
+@@ -9,7 +9,7 @@ gnome.gtkdoc(
+   scan_args: '--rebuild-types',
+   gobject_typesfile: meson.project_name() + '.types',
+   install: true,
+-  install_dir: join_paths(dconf_datadir, 'gtk-doc', 'html', meson.project_name())
++  install_dir: join_paths(dconf_datadir, 'doc', 'gtk-doc', 'html', meson.project_name())
+ )
+ 
+ if get_option('enable-man')

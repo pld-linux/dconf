@@ -6,19 +6,20 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.28.0
+Version:	0.30.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.28/%{name}-%{version}.tar.xz
-# Source0-md5:	81faa8e68e5ea71ff0ee75050fc0759c
-Patch0:		%{name}-docs-build.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.30/%{name}-%{version}.tar.xz
+# Source0-md5:	0fedc411cb0e12052c1215b777cb8686
 URL:		http://live.gnome.org/dconf
 BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.41.0
-BuildRequires:	rpmbuild(macros) >= 1.527
+BuildRequires:	meson >= 0.46.0
+BuildRequires:	ninja
+BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.727
 BuildRequires:	tar >= 1:1.22
 # not needed atm., generated files are packaged
 #%{?with_vala:BuildRequires:	vala >= 2:0.18.0}
@@ -99,11 +100,10 @@ API dconf dla języka Vala.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %meson build \
-	-Denable-gtk-doc=%{__true_false apidocs}
+	-Dgtk_doc=%{__true_false apidocs}
 
 %meson_build -C build
 

@@ -6,12 +6,12 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.30.0
+Version:	0.30.1
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.30/%{name}-%{version}.tar.xz
-# Source0-md5:	0fedc411cb0e12052c1215b777cb8686
+# Source0-md5:	a959eef51c917b3c57cfbef1448a375e
 URL:		http://live.gnome.org/dconf
 BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gtk-doc >= 1.15

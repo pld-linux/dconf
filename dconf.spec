@@ -8,10 +8,11 @@ Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
 Version:	0.30.1
 Release:	1
-License:	LGPL v2+
+License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.30/%{name}-%{version}.tar.xz
 # Source0-md5:	a959eef51c917b3c57cfbef1448a375e
+Patch0:		%{name}-bash-completion.patch
 URL:		http://live.gnome.org/dconf
 BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gtk-doc >= 1.15
@@ -24,7 +25,7 @@ BuildRequires:	tar >= 1:1.22
 # not needed atm., generated files are packaged
 #%{?with_vala:BuildRequires:	vala >= 2:0.18.0}
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.39.1
+Requires(post,postun):	glib2 >= 1:2.44.0
 Requires:	dbus
 Requires:	glib2 >= 1:2.44.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -100,16 +101,17 @@ API dconf dla języka Vala.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %meson build \
+	-Dbash_completion_dir=%{bash_compdir} \
 	-Dgtk_doc=%{__true_false apidocs}
 
 %meson_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/dconf/{db,profile}
 install -d $RPM_BUILD_ROOT%{_datadir}/dconf/profile
 

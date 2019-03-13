@@ -6,18 +6,18 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.30.1
+Version:	0.32.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.30/%{name}-%{version}.tar.xz
-# Source0-md5:	a959eef51c917b3c57cfbef1448a375e
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.32/%{name}-%{version}.tar.xz
+# Source0-md5:	e1ac0b6285abefeed69ca9e380e44f5a
 Patch0:		%{name}-bash-completion.patch
 URL:		http://live.gnome.org/dconf
 BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libxslt-progs
-BuildRequires:	meson >= 0.46.0
+BuildRequires:	meson >= 0.47.0
 BuildRequires:	ninja
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.727

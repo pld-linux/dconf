@@ -14,15 +14,16 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.36/%{name}-%{version}.ta
 # Source0-md5:	1a50c988d9f0206f74a44f7c6d09cead
 Patch0:		%{name}-bash-completion.patch
 URL:		http://live.gnome.org/dconf
+BuildRequires:	dbus-devel
 BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gtk-doc >= 1.15
 BuildRequires:	libxslt-progs
 BuildRequires:	meson >= 0.47.0
-BuildRequires:	ninja
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.727
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
-# not needed atm., generated files are packaged
+# not needed atm., generated files (.deps, .vapi) are packaged in tarball
 #%{?with_vala:BuildRequires:	vala >= 2:0.18.0}
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.44.0
@@ -58,7 +59,7 @@ Summary:	dconf API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki dconf
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -73,7 +74,7 @@ Summary:	bash-completion for dconf
 Summary(pl.UTF-8):	Bashowe uzupełnianie nazw dla dconf
 Group:		Applications/Shells
 Requires:	bash-completion >= 2
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -89,7 +90,7 @@ Summary(pl.UTF-8):	API dconf dla języka Vala
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala >= 2:0.18.0
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -108,14 +109,14 @@ API dconf dla języka Vala.
 	-Dbash_completion_dir=%{bash_compdir} \
 	-Dgtk_doc=%{__true_false apidocs}
 
-%meson_build -C build
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/dconf/{db,profile}
 install -d $RPM_BUILD_ROOT%{_datadir}/dconf/profile
 
-%meson_install -C build
+%ninja_install -C build
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 

@@ -6,14 +6,14 @@
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.36.0
+Version:	0.38.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.36/%{name}-%{version}.tar.xz
-# Source0-md5:	1a50c988d9f0206f74a44f7c6d09cead
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.38/%{name}-%{version}.tar.xz
+# Source0-md5:	716cf730995cf133c2c443556a66a50c
 Patch0:		%{name}-bash-completion.patch
-URL:		http://live.gnome.org/dconf
+URL:		https://wiki.gnome.org/Projects/dconf
 BuildRequires:	dbus-devel
 BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gtk-doc >= 1.15

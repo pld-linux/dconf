@@ -59,9 +59,7 @@ Summary:	dconf API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki dconf
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for dconf library.
@@ -74,9 +72,7 @@ Summary:	bash-completion for dconf
 Summary(pl.UTF-8):	Bashowe uzupełnianie nazw dla dconf
 Group:		Applications/Shells
 Requires:	bash-completion >= 2
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description -n bash-completion-dconf
 bash-completion for dconf.
@@ -90,9 +86,7 @@ Summary(pl.UTF-8):	API dconf dla języka Vala
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala >= 2:0.18.0
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description -n vala-dconf
 dconf API for Vala language.

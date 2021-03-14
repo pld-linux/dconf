@@ -1,19 +1,19 @@
 #
 # Conditional build:
-%bcond_without	apidocs		# do not build and package API docs
-%bcond_without	vala		# do not build Vala API
+%bcond_without	apidocs		# gtk-doc based API documentation
+%bcond_without	vala		# Vala API
 #
 Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
-Version:	0.38.0
+Version:	0.40.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.38/%{name}-%{version}.tar.xz
-# Source0-md5:	716cf730995cf133c2c443556a66a50c
-Patch0:		%{name}-bash-completion.patch
+Source0:	https://download.gnome.org/sources/dconf/0.40/%{name}-%{version}.tar.xz
+# Source0-md5:	ac8db20b0d6b996d4bbbeb96463d01f0
 URL:		https://wiki.gnome.org/Projects/dconf
+BuildRequires:	bash-completion-devel >= 2.10
 BuildRequires:	dbus-devel
 BuildRequires:	glib2-devel >= 1:2.44.0
 BuildRequires:	gtk-doc >= 1.15
@@ -21,6 +21,7 @@ BuildRequires:	libxslt-progs
 BuildRequires:	meson >= 0.47.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 # not needed atm., generated files (.deps, .vapi) are packaged in tarball
@@ -71,7 +72,7 @@ Dokumentacja API biblioteki dconf.
 Summary:	bash-completion for dconf
 Summary(pl.UTF-8):	Bashowe uzupełnianie nazw dla dconf
 Group:		Applications/Shells
-Requires:	bash-completion >= 2
+Requires:	bash-completion >= 2.10
 BuildArch:	noarch
 
 %description -n bash-completion-dconf
@@ -96,12 +97,11 @@ API dconf dla języka Vala.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %meson build \
-	-Dbash_completion_dir=%{bash_compdir} \
-	-Dgtk_doc=%{__true_false apidocs}
+	-Dgtk_doc=%{__true_false apidocs} \
+	-Dsystemduserunitdir=%{systemduserunitdir}
 
 %ninja_build -C build
 
@@ -142,6 +142,7 @@ umask 022
 %attr(755,root,root) %{_libexecdir}/dconf-service
 %attr(755,root,root) %{_libdir}/gio/modules/libdconfsettings.so
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
+%{systemduserunitdir}/dconf.service
 %dir %{_sysconfdir}/dconf
 %dir %{_sysconfdir}/dconf/db
 %dir %{_sysconfdir}/dconf/profile

@@ -7,7 +7,7 @@ Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
 Version:	0.40.0
-Release:	3
+Release:	2
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/dconf/0.40/%{name}-%{version}.tar.xz
@@ -22,16 +22,14 @@ BuildRequires:	meson >= 0.47.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 2.011
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	tar >= 1:1.22
 # not needed atm., generated files (.deps, .vapi) are packaged in tarball
 #%{?with_vala:BuildRequires:	vala >= 2:0.18.0}
 BuildRequires:	xz
 Requires(post,postun):	glib2 >= 1:2.44.0
-Requires(post,preun):	systemd-units >= 250.1
 Requires:	dbus
 Requires:	glib2 >= 1:2.44.0
-Requires:	systemd-units >= 250.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -121,18 +119,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/ldconfig
+
 umask 022
 %{_bindir}/gio-querymodules %{_libdir}/gio/modules || :
-%glib_compile_schemas
-%systemd_user_post dconf.service
 
-%preun
-%systemd_user_preun dconf.service
+%glib_compile_schemas
 
 %postun
 /sbin/ldconfig
+
 umask 022
 %{_bindir}/gio-querymodules %{_libdir}/gio/modules || :
+
 %glib_compile_schemas
 
 %files

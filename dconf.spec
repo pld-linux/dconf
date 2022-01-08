@@ -7,7 +7,7 @@ Summary:	Low-level configuration system
 Summary(pl.UTF-8):	Niskopoziomowy system konfiguracji
 Name:		dconf
 Version:	0.40.0
-Release:	2
+Release:	4
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/dconf/0.40/%{name}-%{version}.tar.xz

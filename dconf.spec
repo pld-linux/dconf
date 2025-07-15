@@ -99,18 +99,18 @@ API dconf dla języka Vala.
 %setup -q
 
 %build
-%meson build \
+%meson \
 	-Dgtk_doc=%{__true_false apidocs} \
 	-Dsystemduserunitdir=%{systemduserunitdir}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/dconf/{db,profile}
 install -d $RPM_BUILD_ROOT%{_datadir}/dconf/profile
 
-%ninja_install -C build
+%meson_install
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 

@@ -22,7 +22,7 @@ BuildRequires:	meson >= 0.47.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
 # not needed atm., generated files (.deps, .vapi) are packaged in tarball
 #%{?with_vala:BuildRequires:	vala >= 2:0.18.0}
